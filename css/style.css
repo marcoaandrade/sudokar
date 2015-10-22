@@ -1,0 +1,50 @@
+p {
+    text-align: center;
+}
+table {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    /*border: 1px solid #000 !important;*/
+}
+
+.table-responsive {
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+}
+
+button, input, select, textarea {
+    text-align: center;
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+.smile {
+    max-width: 30px;
+    max-height: 30px;
+    margin: 10px;
+}
+
+.primeiro-paragrafo {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.texto-introdutorio {
+    text-align: center;
+}
+
+.sudokar {
+    margin: 20px 0;
+}
+
+.imagem-home {
+    text-align: center;
+}
