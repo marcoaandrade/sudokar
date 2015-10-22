@@ -38,7 +38,7 @@ function Sudokar() {
 
         for (var linha = 0; linha < qtd_linhas; linha++) {
             for (var coluna = 0; coluna < qtd_linhas; coluna++) {
-                index = (linha - 1) * BOARD_SIZE + (coluna - 1);
+                index = (linha) * BOARD_SIZE + (coluna);
                 if (board[index].value != EMPTY) {
                     custo_linha[linha]++;
                 }
@@ -51,7 +51,7 @@ function Sudokar() {
 
         for (var coluna = 0; coluna < qtd_colunas; coluna++) {
             for (var linha = 0; linha < qtd_colunas; linha++) {
-                index = (linha - 1) * BOARD_SIZE + (coluna - 1);
+                index = (linha) * BOARD_SIZE + (coluna);
                 if (board[index].value != EMPTY) {
                     custo_coluna[coluna]++;
                 }
@@ -150,8 +150,8 @@ function Sudokar() {
 
             var menor_custo = -1;
 
-            for (var linha = Math.floor(box_atual / BOX_SIZE) * 3 + 1; linha < (Math.floor(box_atual / BOX_SIZE) * 3) + BOX_SIZE; linha++) {
-                for (var coluna = box_atual % BOX_SIZE + 1; coluna < box_atual % BOX_SIZE + 3; coluna++) {
+            for (var linha = Math.floor(box_atual / BOX_SIZE) * 3 + 1; linha < (Math.floor(box_atual / BOX_SIZE) * 3 + 1) + BOX_SIZE; linha++) {
+                for (var coluna = box_atual % BOX_SIZE + 1; coluna < box_atual % BOX_SIZE + 1 + BOX_SIZE; coluna++) {
                     index = (linha - 1) * BOARD_SIZE + (coluna - 1);
                     if(menor_custo >= 0) {
                         if((custo_elemento[index] < custo_elemento[menor_custo]) && (custo_elemento[index] > 0)) {
@@ -184,7 +184,7 @@ function Sudokar() {
                 }
             }
         }
-
+        /* CASO NAO ACHE A SOLUCAO */
         board[index].value = EMPTY;
         return false;
     }

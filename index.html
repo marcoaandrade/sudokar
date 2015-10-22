@@ -2,13 +2,15 @@
 <html>
 
   <head>
+      <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+      <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <title>Sudokeiro</title>
+    <title>Sudokar</title>
 
     <style type="text/css">
 
@@ -18,7 +20,11 @@
   </head>
   <body>
     <div class="container">
-        <div class="primeiro-paragrafo">
+        <div class="logo col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a href="index.html"><img src="img/logo.png" /></a>
+
+        </div>
+        <div class="primeiro-paragrafo col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="texto-introdutorio">
                 Escolha com qual método você deseja solucionar o seu Sudoku!
             </div>
@@ -27,8 +33,24 @@
             </div>
         </div>
 
-        <p><a class="sudokar btn btn-primary" type="button" href="largura.html">Busca em Largura</a></p>
-        <p><a class="sudokar btn btn-primary" type="button" href="guloso.html">Algoritmo Guloso</a></p>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="botao-esq col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <a class="sudokar btn btn-primary" type="button" href="largura.html">Busca em Largura</a>
+            </div>
+            <div class="botao-dir col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <a class="sudokar btn btn-primary" type="button" href="guloso.html">Algoritmo Guloso</a>
+            </div>
+        </div>
+    </div>
+    <div class="rodape">
+        <div class="container">
+            <div class="desenvolvido col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <a href="equipe.html">Equipe de desenvolvimento</a>
+            </div>
+            <div class="direitos col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                ® Todos os direitos reservados.
+            </div>
+        </div>
     </div>
   </body>
 </html>

@@ -1,14 +1,4 @@
-/************************************************************************
- *
- * sudokiller.js - Javascript SuDoku solver (see it at work!)
- *
- * Author: Daniele Mazzocchio
- * Last update: Jan 30, 2006
- *
- * Download sources
- ************************************************************************/
-
-function SudoKiller() {
+function Sudokar() {
     /*
      * Constructor of the SuDoku solver.
      */
@@ -75,7 +65,7 @@ function SudoKiller() {
     }
 }
 
-SudoKiller.prototype.drawBoard = function() {
+Sudokar.prototype.drawBoard = function() {
     /*
      * Draw the game board.
      */

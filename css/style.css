@@ -8,12 +8,51 @@ table {
     margin-right: auto;
 }
 
+.outro {
+    text-align: center;
+}
+
+.aluno {
+    padding: 20px 100px;
+}
+
+.foto {
+    text-align: right;
+}
+
+.foto img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.info {
+    text-align: center;
+}
+
+.info p {
+    text-align: left;
+}
+
 td {
     /*border: 1px solid #000 !important;*/
 }
 
+.desenvolvido a {
+    color: #ffffff !important;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 0 !important;
+}
+
+input, select, textarea {
+    height: 40px;
+    width: 45px;
+    font-size: 21px !important;
+}
+
 .table-responsive {
-    max-width: 500px;
+    max-width: 430px;
     text-align: center;
     margin: auto;
 }
@@ -43,8 +82,60 @@ input {
 
 .sudokar {
     margin: 20px 0;
+    border-radius: 0 !important;
 }
 
 .imagem-home {
     text-align: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo img {
+    margin: auto;
+    max-width: 100%;
+}
+
+.botao-esq {
+    text-align: right;
+}
+
+.botao-dir {
+    text-align: left;
+}
+
+.rodape {
+    background-color: #286090;
+    margin-top: 60px;
+    min-height: 50px;
+    color: #ffffff;
+    margin-top: 1px solid #204d74;
+}
+
+.desenvolvido {
+    padding-top: 15px;
+    text-align: left;
+    padding-left: 50px;
+}
+
+.direitos {
+    padding-top: 15px;
+    text-align: right;
+    padding-right: 50px;
+}
+
+.cabecalho {
+    margin-bottom: 50px;
+}
+
+@media(max-width: 767px) {
+    .botao-esq {
+        text-align: center;
+    }
+
+    .botao-dir {
+        text-align: center;
+    }
 }
