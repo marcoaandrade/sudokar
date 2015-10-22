@@ -1,3 +1,36 @@
+.power {
+    width: 200px;
+    height: 40px;
+    position: relative;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.on {
+    padding: 5px 15px;
+    background-color: #ababab;
+    display: inline;
+    color: #ababab;
+    border: 1px solid #000000;
+}
+
+.on:hover {
+    color: #000000;
+    font-weight: bold;
+}
+
+.off {
+    padding: 3px 15px;
+    display: inline;
+    background-color: #23fa56;
+    border: 1px solid #000000;
+    border-left: 1px solid #23fa56;
+}
+
+.off a {
+    color: #000000;
+}
+
 p {
     text-align: center;
 }
