@@ -1,33 +1,33 @@
 function Sudokar() {
-    /*
-     * Constructor of the SuDoku solver.
-     */
-    BOARD_SIZE = 9;           // Width and height of the SuDoku board
-    BOX_SIZE = 3;             // Width and height of the inner boxes
-    EMPTY = "";               // Empty cell marker
+    //  Construtor do solucionador do Sudoku
 
-    var board = new Array();  // Cells array
+    TAM_TABULEIRO = 9;           // Altura e Largura do tabuleiro (9x9)
+    TAM_CAIXA = 3;             // Altura e largura da caixa interna (3x3)
+    VAZIA = "";               // Marcador de célula vazia
+
+    var tabuleiro = new Array();  // Cells array
 
     var custo_linha = new Array();
     var custo_coluna = new Array();
     var custo_elemento = new Array();
 
-    function check(num, row, col) {
-        /*
-         * Check if num is, according to SuDoku rules, a legal candidate
-         * for the given cell.
-         */
-        var row_index, col_index, box_index;    // Indexes of the cells to check
-        var r = (Math.floor(row / BOX_SIZE) * BOX_SIZE);
-        var c = (Math.floor(col / BOX_SIZE) * BOX_SIZE);
+    function verifica_numero(num, linha, col) {
+        /* 
+        Analisa se a variavel num passada como parametro é um número candidato a uma dada celula,
+        isso de acordo com as regras do jogo
+        */
+        
+        var linha_index, col_index, caixa_index;    // Index das celulas a serem analisadas
+        var l = (Math.floor(linha / TAM_CAIXA) * TAM_CAIXA);
+        var c = (Math.floor(col / TAM_CAIXA) * TAM_CAIXA);
 
-        for (var i=0; i<BOARD_SIZE; i++) {
-            row_index = (row * BOARD_SIZE) + i;
-            col_index = col + (i * BOARD_SIZE);
-            box_index = (r + Math.floor(i / BOX_SIZE)) * BOARD_SIZE + c + (i % BOX_SIZE);
-            if (num == board[row_index].value ||
-                num == board[col_index].value ||
-                num == board[box_index].value)
+        for (var i=0; i<TAM_TABULEIRO; i++) {
+            linha_index = (linha * TAM_TABULEIRO) + i;
+            col_index = col + (i * TAM_TABULEIRO);
+            caixa_index = (l + Math.floor(i / TAM_CAIXA)) * TAM_TABULEIRO + c + (i % TAM_CAIXA);
+            if (num == tabuleiro[linha_index].value ||
+                num == tabuleiro[col_index].value ||
+                num == tabuleiro[caixa_index].value)
                 return false;
         }
         return true;
@@ -38,8 +38,8 @@ function Sudokar() {
 
         for (var linha = 0; linha < qtd_linhas; linha++) {
             for (var coluna = 0; coluna < qtd_linhas; coluna++) {
-                index = (linha) * BOARD_SIZE + (coluna);
-                if (board[index].value != EMPTY) {
+                index = (linha) * TAM_TABULEIRO + (coluna);
+                if (tabuleiro[index].value != VAZIA) {
                     custo_linha[linha]++;
                 }
             }
@@ -51,8 +51,8 @@ function Sudokar() {
 
         for (var coluna = 0; coluna < qtd_colunas; coluna++) {
             for (var linha = 0; linha < qtd_colunas; linha++) {
-                index = (linha) * BOARD_SIZE + (coluna);
-                if (board[index].value != EMPTY) {
+                index = (linha) * TAM_TABULEIRO + (coluna);
+                if (tabuleiro[index].value != VAZIA) {
                     custo_coluna[coluna]++;
                 }
             }
@@ -60,26 +60,26 @@ function Sudokar() {
     }
 
     function calcula_custo() {
-        calcula_custo_linha(BOARD_SIZE);
-        calcula_custo_coluna(BOARD_SIZE);
+        calcula_custo_linha(TAM_TABULEIRO);
+        calcula_custo_coluna(TAM_TABULEIRO);
 
         var index = 0;
 
-        for (var coluna = 0; coluna < BOARD_SIZE; coluna++) {
-            for (var linha = 0; linha < BOARD_SIZE; linha++) {
-                index = (linha - 1) * BOARD_SIZE + (coluna - 1);
+        for (var coluna = 0; coluna < TAM_TABULEIRO; coluna++) {
+            for (var linha = 0; linha < TAM_TABULEIRO; linha++) {
+                index = (linha - 1) * TAM_TABULEIRO + (coluna - 1);
                 custo_elemento[index] = custo_linha[linha] + custo_coluna[coluna];
             }
         }
     }
 
-    function box_completa(box) {
+    function caixa_completa(caixa) {
         var index = 0;
 
-        for (var linha = Math.floor(box / BOX_SIZE) * 3 + 1; linha < (Math.floor(box / BOX_SIZE) * 3) + BOX_SIZE; linha++) {
-            for (var coluna = box % BOX_SIZE + 1; coluna < box % BOX_SIZE + 3; coluna++) {
-                index = (linha - 1) * BOARD_SIZE + (coluna - 1);
-                if (board[index].value == EMPTY) {
+        for (var linha = Math.floor(caixa / TAM_CAIXA) * 3 + 1; linha < (Math.floor(caixa / TAM_CAIXA) * 3) + TAM_CAIXA; linha++) {
+            for (var coluna = caixa % TAM_CAIXA + 1; coluna < caixa % TAM_CAIXA + 3; coluna++) {
+                index = (linha - 1) * TAM_TABULEIRO + (coluna - 1);
+                if (tabuleiro[index].value == VAZIA) {
                     return false;
                 }
             }
@@ -88,71 +88,69 @@ function Sudokar() {
         return true;
     }
 
-    function primeiro_elemento(box) {
-        var linha = Math.floor(box / BOX_SIZE) * 3 + 1;
-        var coluna = box % BOX_SIZE + 1;
+    function primeiro_elemento(caixa) {
+        var linha = Math.floor(caixa / TAM_CAIXA) * 3 + 1;
+        var coluna = caixa % TAM_CAIXA + 1;
 
-        return (linha - 1) * BOARD_SIZE + (coluna - 1);
+        return (linha - 1) * TAM_TABULEIRO + (coluna - 1);
 
     }
 
-    function guess(index) {
-        /*
-         * Recursively test all candidate numbers for a given cell until
-         * the board is complete.
-         */
-        var row = Math.floor(index / BOARD_SIZE);
-        var col = index % BOARD_SIZE;
+    function adivinha_elemento(index) {
+        // Testa recursivamente todos os numeros candidatos para uma dada célula até que Sudoku esteja resolvido
 
-        var box_atual = 1;
+        var linha = Math.floor(index / TAM_TABULEIRO);
+        var col = index % TAM_TABULEIRO;
 
-        if (index >= board.length)
+        var caixa_atual = 1;
+
+        if (index >= tabuleiro.length)
             return true;
 
-        if (board[index].value != EMPTY) {
-            if(row <= 3) {
+        if (tabuleiro[index].value != VAZIA) {
+            if(linha <= 3) {
                 if(col <= 3) {
-                    box_atual = 1;
+                    caixa_atual = 1;
                 }
 
                 else if(col <= 6) {
-                    box_atual = 2;
+                    caixa_atual = 2;
                 }
                 else {
-                    box_atual = 3;
+                    caixa_atual = 3;
                 }
             }
 
-            else if(row <= 6) {
+            else if(linha <= 6) {
                 if(col <= 3) {
-                    box_atual = 4;
+                    caixa_atual = 4;
                 }
 
                 else if(col <= 6) {
-                    box_atual = 5;
+                    caixa_atual = 5;
                 }
                 else {
-                    box_atual = 6;
+                    caixa_atual = 6;
                 }
             }
             else {
                 if(col <= 3) {
-                    box_atual = 7;
+                    caixa_atual = 7;
                 }
 
                 else if(col <= 6) {
-                    box_atual = 8;
+                    caixa_atual = 8;
                 }
                 else {
-                    box_atual = 9;
+                    caixa_atual = 9;
                 }
             }
 
             var menor_custo = -1;
 
-            for (var linha = Math.floor(box_atual / BOX_SIZE) * 3 + 1; linha < (Math.floor(box_atual / BOX_SIZE) * 3 + 1) + BOX_SIZE; linha++) {
-                for (var coluna = box_atual % BOX_SIZE + 1; coluna < box_atual % BOX_SIZE + 1 + BOX_SIZE; coluna++) {
-                    index = (linha - 1) * BOARD_SIZE + (coluna - 1);
+            for (var linha = Math.floor(caixa_atual / TAM_TABULEIRO) * 3 + 1; linha < (Math.floor(caixa_atual / TAM_CAIXA) * 3 + 1) + TAM_CAIXA; linha++) {
+                for (var coluna = caixa_atual % TAM_CAIXA + 1; coluna < caixa_atual % TAM_CAIXA + 1 + TAM_CAIXA; coluna++) {
+                    index = (linha - 1) * TAM_TABULEIRO + (coluna - 1);
                     if(menor_custo >= 0) {
                         if((custo_elemento[index] < custo_elemento[menor_custo]) && (custo_elemento[index] > 0)) {
                             menor_custo = index;
@@ -164,51 +162,47 @@ function Sudokar() {
                 }
             }
 
-            return guess(menor_custo);
+            return adivinha_elemento(menor_custo);
         }
 
-        for (var i=1; i<=BOARD_SIZE; i++) {
-            if (check(i, row, col)) {
-                board[index].value = i;
+        for (var i=1; i<=TAM_TABULEIRO; i++) {
+            if (verifica_numero(i, linha, col)) {
+                tabuleiro[index].value = i;
                 calcula_custo();
-                if(!box_completa(box_atual)) {
-                    if (guess(index))
+                if(!caixa_completa(caixa_atual)) {
+                    if (adivinha_elemento(index))
                         return true;
                 }
                 else {
-                    if(box_atual + 1 > BOARD_SIZE) {
+                    if(caixa_atual + 1 > TAM_TABULEIRO) {
                         return true;
                     }
-                    if (guess(primeiro_elemento(box_atual + 1)))
+                    if (adivinha_elemento(primeiro_elemento(caixa_atual + 1)))
                         return true;
                 }
             }
         }
         /* CASO NAO ACHE A SOLUCAO */
-        board[index].value = EMPTY;
+        tabuleiro[index].value = VAZIA;
         return false;
     }
 
     this.kill = function() {
-        /*
-         * Get the board content and start solving the game.
-         */
-        board = document.getElementsByTagName("input");
-        if (!guess(0))
-            alert("Sorry, solution not found!");
+        // Recebe os dados preenchidos da tabela e resolve o Sudoku
+        tabuleiro = document.getElementsByTagName("input");
+        if (!adivinha_elemento(0))
+            alert("Solução não encontrada  =(");
     }
 }
 
 Sudokar.prototype.drawBoard = function() {
-    /*
-     * Draw the game board.
-     */
+    // Interface do Tabuleiro
     var hstyle, vstyle;      // Borders styles
-    for (var row=0; row<BOARD_SIZE; row++) {
+    for (var linha=0; linha < TAM_TABULEIRO; linha++) {
         document.write('<tr>');
-        hstyle = row % BOX_SIZE ? "" : "border-top: 1px solid #000;";
-        for (var col=0; col<BOARD_SIZE; col++) {
-            vstyle = col % BOX_SIZE ? "" : "border-left: 1px solid #000;";
+        hstyle = linha % TAM_CAIXA ? "" : "border-top: 1px solid #000;";
+        for (var col=0; col < TAM_TABULEIRO; col++) {
+            vstyle = col % TAM_CAIXA ? "" : "border-left: 1px solid #000;";
             document.write('<td style="' + hstyle + vstyle + '">');
             document.write('<input type="text" size="1" maxlength="1" /></td>');
         }
