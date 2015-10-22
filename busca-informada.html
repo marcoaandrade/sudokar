@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/sudoku.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+
+    <title>Sudokeiro</title>
+
+    <style type="text/css">
+
+    </style>
+
+
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li><a href="index.html">Busca em Largura</a></li>
+        <li class="active"><a href="busca-informada.html">Busca Informada</a></li>
+    </ul>
+    <div class="primeiro-paragrafo">
+        <div class="texto-introdutorio">
+            Preencha os campos que desejar e clique em Sudokar para solucionar o seu Sudoku!
+        </div>
+        <div class="imagem-home">
+            <img class="smile" src="img/smile.png" />
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <script type="text/javascript">
+                var sk = new SudoKiller();
+                sk.drawBoard();
+            </script>
+        </table>
+    </div>
+    <p><button class="sudokar btn btn-primary" type="button" onclick="sk.kill();">Sudokar</button></p>
+</div>
+</body>
+</html>
