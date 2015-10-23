@@ -1,8 +1,6 @@
 function Sudokar() {
-    /*  Construtor do solucionador do Sudoku por meio do método da Busca Gulosa
+    //  Construtor do solucionador do Sudoku por meio do método da Busca Gulosa
     //  As linhas e colunas do tabuleiro possuem custos que são calculados pela quantidade de elementos vaz
-    // 
-    */
 
     TAM_TABULEIRO = 9;           // Altura e Largura do tabuleiro (9x9)
     TAM_CAIXA = 3;             // Altura e largura da caixa interna (3x3)
@@ -146,25 +144,26 @@ function Sudokar() {
                 else
                     caixa_atual = 9;
             }
-        }
         
-        var menor_custo = -1;
-
-         for (var linha = Math.floor(caixa_atual / TAM_TABULEIRO) * 3 + 1; linha < (Math.floor(caixa_atual / TAM_CAIXA) * 3 + 1) + TAM_CAIXA; linha++) {
-            for (var coluna = caixa_atual % TAM_CAIXA + 1; coluna < caixa_atual % TAM_CAIXA + 1 + TAM_CAIXA; coluna++) {
-                index = (linha - 1) * TAM_TABULEIRO + (coluna - 1);
-                if(menor_custo >= 0) {
-                    if((custo_elemento[index] < custo_elemento[menor_custo]) && (custo_elemento[index] > 0)) {
-                        menor_custo = index;
+             var menor_custo = -1;
+             
+            //Analisa qual index com menor custo e utiliza como parametro recursivamente para funcao adivinha_elemento
+             for (var linha = Math.floor(caixa_atual / TAM_TABULEIRO) * 3 + 1; linha < (Math.floor(caixa_atual / TAM_CAIXA) * 3 + 1) + TAM_CAIXA; linha++) {
+                for (var coluna = caixa_atual % TAM_CAIXA + 1; coluna < caixa_atual % TAM_CAIXA + 1 + TAM_CAIXA; coluna++) {
+                    index = (linha - 1) * TAM_TABULEIRO + (coluna - 1);
+                    if(menor_custo >= 0) {
+                        if((custo_elemento[index] < custo_elemento[menor_custo]) && (custo_elemento[index] > 0)) {
+                            menor_custo = index;
+                        }
                     }
+                    else
+                        menor_custo = index;
                 }
-                else
-                    menor_custo = index;
             }
-        }
-        return adivinha_elemento(menor_custo);
-            
-
+            return adivinha_elemento(menor_custo);
+        }   
+    
+        //Preenche a tabela com a função verifica numero
         for (var i=1; i<=TAM_TABULEIRO; i++) {
             if (verifica_numero(i, linha, col)) {
                 tabuleiro[index].value = i;
@@ -197,7 +196,7 @@ function Sudokar() {
 
 Sudokar.prototype.drawBoard = function() {
     // Interface do Tabuleiro
-    var hstyle, vstyle;      // Borders styles
+    var hstyle, vstyle;      
     for (var linha=0; linha < TAM_TABULEIRO; linha++) {
         document.write('<tr>');
         hstyle = linha % TAM_CAIXA ? "" : "border-top: 1px solid #000;";
